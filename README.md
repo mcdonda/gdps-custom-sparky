@@ -47,4 +47,7 @@ There are 2 ways to do this:
 3. Press upload and then upload the zip file of your bot files you just made. This didn't go very smooth sailing when I did it so I just went to my app, pressed explorer, and just added all the files manually as there aren't too many.
 4. If there are any issues, you can either join the discloud discord server or dm me on discord (@mcdonda).
 
-PLEASE let me know if there is anything missing from these instructions on discord.
+## Support:
+To be alerted for updates, join the [McGDPS](https://discord.gg/NDZ6Te7eaw) discord server. Either get the Sparky Updates notification role during onboarding, follow the #sparky-updates channel, or both. Only important updates will be pinged and announced, so don't worry about that.
+
+PLEASE let me know if there is anything missing from these instructions on discord (@mcdonda).
