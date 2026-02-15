@@ -1,0 +1,184 @@
+{
+  "levels": [
+    {
+      "name": "Welcom",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1470996454691573924/image.png?ex=698d53b4&is=698c0234&hm=2ae090f0fc0a2d73067e1cbb5a09cec309fc05baab9a6a84c4d4d4fca88e84cf&=&format=webp&quality=lossless&width=2999&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Crystalize",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471251391514152970/image.png?ex=698e4122&is=698cefa2&hm=b67c43414f5e83e13c2a97da650e835154bad8b4bb04d077ca07e4bafa109374&=&format=webp&quality=lossless&width=2000&height=1500",
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Triplespike Bonanza",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471251772180922653/image.png?ex=698e417d&is=698ceffd&hm=4b3621dcecaaa91a4eed810fb9bf008e84d7c7bbe3babbc75809a8531dd1d6ae&=&format=webp&quality=lossless&width=1343&height=1007",
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Risky Reels",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471252218173722665/image.png?ex=698e41e7&is=698cf067&hm=eb73e5e4584a3b369e6417c3baa9a7ded45a81addcb31ef9d3a4545ac5ee3da7&=&format=webp&quality=lossless&width=2001&height=1314",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Restored Reels",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471252406884106291/image.png?ex=698e4214&is=698cf094&hm=ad9a6e40fe09677d83fa3fd4976eee52ed1bbebeab0c599d87bc1d885f89dbc5&=&format=webp&quality=lossless&width=1968&height=1100",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Captain Cool",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471254464936677536/image.png?ex=698e43ff&is=698cf27f&hm=abb64b1628ab4d94dbb288d63a491dc1c269dc54b028cf2959eafd82f583aa31&=&format=webp&quality=lossless&width=2550&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Bad Christmas",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471255245626675394/image.png?ex=698e44b9&is=698cf339&hm=53b1a9b5230b9c6cd5c80a63f876987546e000e84f050bca8ae7e67cd9002730&=&format=webp&quality=lossless&width=773&height=525",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "xpxt xn xx xacx",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471255740730708279/image.png?ex=698e452f&is=698cf3af&hm=65ffd3a50e7a70a6f5106c442460a73adce2ab83d8f330c15597ce7fd33acdb5&=&format=webp&quality=lossless&width=1937&height=1416",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "LaVa LvL",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471256530010771506/image.png?ex=698e45eb&is=698cf46b&hm=d4c1744ee1d9f7470dd644d22cdbccb9783d04dabd437a7ca114a702bcd6b130&=&format=webp&quality=lossless&width=2106&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Minecraft Demon",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471257018026168440/image.png?ex=698e465f&is=698cf4df&hm=35ccabefd84f1bc0331d610a52b2d67250a8edb7aa9b1dd41d2cd4b8489e6a1b&=&format=webp&quality=lossless&width=2955&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Skill Issue",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471265473185185938/image.png?ex=698e4e3f&is=698cfcbf&hm=a266c9f984930bb947935d3f8f999cda41e5078870b17e7e2ffdde139754b44c&=&format=webp&quality=lossless&width=1460&height=864",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "blackwhite v2",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471265707869208616/image.png?ex=698e4e77&is=698cfcf7&hm=4b57ca883879eff948d3219fba69b677933b2ece1742cccd9bf5b1eff7d39469&=&format=webp&quality=lossless&width=1569&height=1122",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Kizu Circles",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471271410562367672/image.png?ex=698e53c7&is=698d0247&hm=2f109b93fc0c4e10675b321f503391a57fbc00962c1fae28e4cc7c893cad1e2a&=&format=webp&quality=lossless&width=2162&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "unda da sea",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471271969411563560/image.png?ex=698e544c&is=698d02cc&hm=17237a84bb7168f95bc3eff20426d0257d92bb40836d99e96e00089414838c06&=&format=webp&quality=lossless&width=707&height=525",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "astic1",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471272271292268698/image.png?ex=698e5494&is=698d0314&hm=80510ab724ead561ac5588a85d3816708f4b0ec81b06adacc4deee9e96a826e5&=&format=webp&quality=lossless&width=717&height=525",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "mcdonda's new year",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471303697945333760/image.png?ex=698e71d9&is=698d2059&hm=484ea92b8ed904c210ded15dc8f6101a43f0f7dfff9fc95749aae3a71dddb4ec&=&format=webp&quality=lossless&width=1721&height=1292",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Oh it Hurts",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471304018595942563/image.png?ex=698e7225&is=698d20a5&hm=401dbe09e2744f36002bb0ab54275cf1d6293fdc0b4dd2b4f7cee9c5509fa6e2&=&format=webp&quality=lossless&width=1859&height=1394",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "So Snowy",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471304167719964716/image.png?ex=698e7249&is=698d20c9&hm=2d08186d0ab40532e2f09af119c38a5104158c5abfcdd43ca4196450b890e0e8&=&format=webp&quality=lossless&width=1473&height=1106",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Groovin",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471306516848967700/image.png?ex=698e7479&is=698d22f9&hm=f9653c644b5ab64f0b92d4d68464e91a9261dbcc40b70db2e93ab5304a570277&=&format=webp&quality=lossless&width=2220&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Hideout",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471320297767567537/image.png?ex=698e814e&is=698d2fce&hm=df35fda4f5484582e8e3d183fe0ef86dcedd4c336e9dc901647b85afa8f6b826&=&format=webp&quality=lossless&width=3315&height=1836",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "xMas Special",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471320546686926942/image.png?ex=698e818a&is=698d300a&hm=410de8c2bdbd002f0995c6ee3dcee026cb1be79b22812498c02e34d4e1bb978a&=&format=webp&quality=lossless&width=2663&height=1838",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "H E R",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471321213094727795/image.png?ex=698e8229&is=698d30a9&hm=110e6d12e5461d223081c3c114af1cc14a3caa91634ebc2a2de78e87769dd6fb&=&format=webp&quality=lossless&width=2676&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "freaky dash",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471321893314232382/image.png?ex=698e82cb&is=698d314b&hm=1cc75a7dd882072e91b29de207c82b0bc6934fb32092ff6760f0bef292ca5b50&=&format=webp&quality=lossless&width=2157&height=1992",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Christmas",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471322313923493939/image.png?ex=698e832f&is=698d31af&hm=da1b4035e9d07a441bb2c7f89012902337908a0c52f8c89d66213008d5ec83c6&=&format=webp&quality=lossless&width=2480&height=1992",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Hot Rod",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471322935376482457/image.png?ex=698e83c3&is=698d3243&hm=cb0a563aa84d474b0ad71b8874de2893a5d79cd56eaa9f76e4bf55ef422187c1&=&format=webp&quality=lossless&width=2637&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "Tomb of Gods",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471324129566261449/image.png?ex=698e84e0&is=698d3360&hm=0fe54132d7ecdc13348a4abef9b0ce655a3dd90a4c5d91b3f9271a6a71681827&=&format=webp&quality=lossless&width=2826&height=1992",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "Termination",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471325482816372848/image.png?ex=698e8623&is=698d34a3&hm=9e48365de4cce356a2e4ac873757270f9687143e9683afc6551c86a8ccb67a0a&=&format=webp&quality=lossless&width=2826&height=1881",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "try my nuts",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471325809737466018/image.png?ex=698e8670&is=698d34f0&hm=55001de801bf653029828b37d7cf1af768ad8d4d3630a05b017f0eca8a0d74d4&=&format=webp&quality=lossless&width=2750&height=1992",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "scarey alert",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471326095008727050/image.png?ex=698e86b4&is=698d3534&hm=cc19760a4ac7c4266a1b5a529fa88e8de14518509ddea302c06873b5163a59bf&=&format=webp&quality=lossless&width=2690&height=1992",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "ice carbon",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471326380967985213/image.png?ex=698e86f9&is=698d3579&hm=6248818343f5c7458893926c340e91871ac30ba8b4dc53758b1e313a7ceccd14&=&format=webp&quality=lossless&width=825&height=522",
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Travel but Short",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471326868761477255/image.png?ex=698e876d&is=698d35ed&hm=71f951c86dc88c7a5afca3e404abc16d5ec718f243afb5eca8f511b22533bdfd&=&format=webp&quality=lossless&width=761&height=525",
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Choco Mint",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471327177520713870/image.png?ex=698e87b7&is=698d3637&hm=5543ff36f3797b3a7138b2ad20beff59b6f138dfcf1bde5d10d2d2a9092a4a82&=&format=webp&quality=lossless&width=2187&height=1464",
+      "difficulty": "Hard"
+    },
+    {
+      "name": "Sick of that fan",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471327760004939776/image.png?ex=698e8841&is=698d36c1&hm=f8aa9acb7efe5057ca626a7dfae2a78725aa399cbbdeaf321109d30a9a5a7641&=&format=webp&quality=lossless&width=2046&height=1691",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "brown demon",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471328828151300118/image.png?ex=698e8940&is=698d37c0&hm=2f81706703017340d29394776e68f3de6926f805721b9f904615a0a28946dd41&=&format=webp&quality=lossless&width=1301&height=819",
+      "difficulty": "Medium"
+    },
+    {
+      "name": "roadblocks demon",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471329088546275468/image.png?ex=698e897e&is=698d37fe&hm=4a99f5694dbc33b3ebc78164fd3f77272a4ce00920e95a1cb51438fe9637ac91&=&format=webp&quality=lossless&width=1209&height=864",
+      "difficulty": "Easy"
+    },
+    {
+      "name": "pickled grommets",
+      "image": "https://media.discordapp.net/attachments/1470996254853955717/1471329250287292549/image.png?ex=698e89a5&is=698d3825&hm=b2f06179452140a3dc238d709baa467b5bb1ec1fa3df4deff075bf1075bd49d9&=&format=webp&quality=lossless&width=1602&height=1103",
+      "difficulty": "Hard"
+    }
+  ]
+}
