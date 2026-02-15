@@ -51,3 +51,22 @@ There are 2 ways to do this:
 To be alerted for updates, join the [McGDPS](https://discord.gg/NDZ6Te7eaw) discord server. Either get the Sparky Updates notification role during onboarding, follow the #sparky-updates channel, or both. Only important updates will be pinged and announced, so don't worry about that.
 
 PLEASE let me know if there is anything missing from these instructions on discord (@mcdonda).
+
+# How to Use the Bot:
+## Settings.json
+There is a file called settings.json. In this file (as of 2/15/2026) there are only 2 settings: allowedChannels and requestChannel.
+1. allowedChannels: In here, put the ids of the channels you want the guessing to be allowed in, format like this: ["channel id 1", "channel id 2"]. If you want it to be playable in all channels, just leave this empty.
+2. requestChannel (required): Put the id of the channel that you want level requests to be forwarded to. Currently the level request system is in beta so expect imporvements to the level adding process soon.
+   
+## Playing the game:
+Just use /guess, just like the original sparky.
+
+## Requesting levels to be added:
+Tell your server about the /request-sparky command. If you set the requestChannel in settings, when people use this command it will send a message to the specified channel with the name and image the user must provide.
+
+## Adding levels
+Eventually a button to accept requests directly on the message will be added to make accepting requested levels easier.
+To add levels, use the /add-level command. Everything is pretty straight forward accept for adding the images which may be a bit confusing. If you are adding the image from a discord message, make sure to copy the image link **from a message that will never be deleted** and copy it like this:
+<img width="787" height="541" alt="image" src="https://github.com/user-attachments/assets/d9b0e016-00b4-4ed8-b6ea-c501b44de346" />
+
+There are some other commands but its pretty easy to figure out what they do. More will be added soon, like a command to correct/remove levels. At the moment, you have to go into the levels.json file and make the changes in there directly.
