@@ -50,7 +50,7 @@ There are 2 ways to do this:
 If you have your own means of hosting, go ahead it should work fine.
 
 ## Support:
-To be alerted for updates, join the [McGDPS](https://discord.gg/NDZ6Te7eaw) discord server. Either get the Sparky Updates notification role during onboarding, follow the #sparky-updates channel, or both. Only important updates will be pinged and announced, so don't worry about that.
+To be alerted for updates, join the [McGDPS](https://discord.gg/NDZ6Te7eaw) discord server. Either get the Sparky Updates notification role during onboarding, follow the #sparky-updates channel, or watch this repository. Only important updates will be pinged and announced in the discord server, so don't worry about that.
 
 PLEASE let me know if there is anything missing from these instructions on discord (@mcdonda).
 
