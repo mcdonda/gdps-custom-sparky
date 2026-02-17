@@ -59,7 +59,10 @@ PLEASE let me know if there is anything missing from these instructions on disco
 There is a file called settings.json. In this file (as of 2/15/2026) there are only 2 settings: allowedChannels and requestChannel.
 1. allowedChannels: In here, put the ids of the channels you want the guessing to be allowed in, format like this: ["channel id 1", "channel id 2"]. If you want it to be playable in all channels, just leave this empty.
 2. requestChannel (required): Put the id of the channel that you want level requests to be forwarded to. Currently the level request system is in beta so expect improvements to the level adding process soon.
-   
+
+## Bot statuses
+You probably don't want the mcgdps ones, right? You can find the statuses near the bottom of src/index.js, you can customize them pretty easily. The different *ActivityTypes* are: Competing, Listening, Watching, Playing, Streaming, and Custom.
+
 ## Playing the game:
 Just use /guess, just like the original sparky.
 
