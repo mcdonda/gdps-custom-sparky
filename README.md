@@ -17,8 +17,8 @@ In Bot permissions, you can just check administrator (unless you don't trust thi
 
 Download the files for the bot and open them in VSCode (or whatever you prefer), the discloud.config file is only needed if you plan on using [Discloud](https://discloud.com) to host the bot. Now, follow this page of instructions on the [official discord.js instructions](https://discordjs.guide/legacy/preparations/installation)
 
-Now, you should have a couple new files added to the folder, such as package.json, package-lock.json, and the node_modules folder whole folder. Inside the package.json file, set "main" to **src/index.js**, and "type" to "module", and save it (ctrl + s). Now, **npm install discord.js dotenv** in a terminal. Once it is complete, make a new file in the root of the project (outside of any folders) called **.env**
-Inside the file, you will need to add some variables in it.
+Now, you should have a couple new files added to the folder, such as package.json, package-lock.json, and the node_modules folder whole folder. Inside the package.json file, set "main" to **src/index.js**, and "type" to "module", and save it (ctrl + s). Now, run **npm install discord.js dotenv** in a terminal. Once it is complete, make a new file in the root of the project (outside of any folders) called **.env**
+Inside the file, you will need to add some variables.
 ```
 DISCORD_TOKEN=(YOUR TOKEN HERE)
 GUILD_ID=(ID OF YOUR DISCORD SERVER)
