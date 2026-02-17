@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import settingsData from './settings.json' with { type: 'json' };
 
-import { Client, GatewayIntentBits, IntentsBitField, EmbedBuilder, Message, ActionRowBuilder, ButtonStyle, ButtonBuilder } from 'discord.js';
+import { Client, GatewayIntentBits, IntentsBitField, EmbedBuilder, Message, ActionRowBuilder, ButtonStyle, ButtonBuilder, ActivityType } from 'discord.js';
 
 
 const client = new Client({
@@ -92,6 +92,7 @@ client.on('interactionCreate', async (interaction) => {
             return interaction.reply({ content: 'Admins only.', ephemeral: true });
         }
 
+        // All of this was written by google gemini tbh:
         let currentPage = 0;
 
         // Helper function to generate the message payload
@@ -130,36 +131,61 @@ client.on('interactionCreate', async (interaction) => {
 
     // leaderboard
     if (interaction.commandName === "points-leaderboard") {
+        let currentPage = 0;
 
-        var lbString = "";
-        const rawData = await fs.readFile('./points.json', 'utf8');
-        const data = JSON.parse(rawData);
+        // I just reused gemini's levels-list code here:
 
-        var orderedList = Object.values(data.users).map(user => ({
-            id: user.id,
-            points: user.points
-        }));
+        // Helper function to generate the message payload
+        const generateMessage = async (page) => {
+            const { embeds, components } = await leaderboard(page); // Ensure your function returns these
+            return { embeds: [embeds], components: [components], fetchReply: true };
+        };
 
-        orderedList.sort((a,b) => b.points - a.points);
+        const response = await interaction.reply(await generateMessage(currentPage));
 
-        for (let u in orderedList) {
-            if (u > 10) {break;}
+        // Create the collector on the message we just sent
+        const collector = response.createMessageComponentCollector({
+            filter: (i) => i.user.id === interaction.user.id, // Only the person who ran the command can click
+            time: 60000 // 60 seconds
+        });
 
-            lbString += `${u+1}. <@${orderedList[u].id}> - **${orderedList[u].points}** points\n`;
-        }
+        collector.on('collect', async (i) => {
+            try {
+                if (i.customId === 'lbnext') currentPage++;
+                if (i.customId === 'lbprevious') currentPage--;
 
-        const embed = new EmbedBuilder().setTitle("Top Points Leaderboard:").setDescription(lbString).setColor('DarkBlue');
-        await interaction.reply({ embeds: [embed] });
+                await i.update(await generateMessage(currentPage)).catch(err => {
+                    console.log("Couldn't update: Message likely deleted or interaction expired.");
+                });
+            } catch (error) {
+                console.error("Error in button collector:", error);
+            }
+        });
+
+
+        collector.on('end', () => {
+            // Optional: Disable buttons when the collector expires
+            interaction.editReply({ components: [] });
+        });
     }
 
     // Requesting levels to be added
     if (interaction.commandName === "request-sparky") {
+        if (settingsData.requestChannel === "") {
+            console.log("No request channel ID is specified in src/settings.json. Please paste the channel ID for the channel you want level requests to be forwarded to.");
+            return interaction.reply("Requests have not been set up yet.");
+        }
         const levelName = interaction.options.getString('level-name');
         const image = interaction.options.getAttachment('image');
 
         interaction.reply({ content: `Request sent for **${levelName}**`, ephemeral: true });
 
-        const channel = settingsData.requestChannel
+        
+        const channel = interaction.client.channels.cache.get(settingsData.requestChannel);
+
+        if (!channel || !channel.isTextBased()) {
+            return interaction.followUp({ content: "Error: Could not find the request channel.", ephemeral: true });
+        }
 
         const embed = new EmbedBuilder().setTitle(`Level Name: ${levelName}`).setImage(image?.url || null).setDescription(`Request sent from <@${interaction.user.id}>`).setColor('Fuchsia');
         await channel.send({ content: "New Sparky Level Request", embeds: [embed] });
@@ -170,6 +196,7 @@ client.on('interactionCreate', async (interaction) => {
     }
 });
 
+// Generating the embed for the levels list
 async function levelsList(page) { 
     const rawData = await fs.readFile('./levels.json', 'utf8');
     const data = JSON.parse(rawData);
@@ -204,6 +231,42 @@ async function levelsList(page) {
     return { embeds: embed, components: row };
 }
 
+// generating embed for leaderboard
+async function leaderboard(page) { 
+    const rawData = await fs.readFile('./points.json', 'utf8');
+    const data = JSON.parse(rawData);
+    
+    data.users.sort((a,b) => b.points - a.points);
+    let lbString = "";
+    // Calculate start and end for slicing
+    const start = page * 10;
+    const items = data.users.slice(start, start + 10);
+
+    items.forEach((user, index) => {
+        lbString += `${start + index + 1}. <@${user.id}> (${user.points} points)\n`;
+    });
+
+    const embed = new EmbedBuilder()
+        .setTitle(`Points Leaderboard (Page ${page + 1})`)
+        .setDescription(lbString || "No more users.")
+        .setColor('Blue');
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId('lbprevious')
+            .setLabel('Previous')
+            .setStyle(ButtonStyle.Secondary)
+            .setDisabled(page === 0), // Disable if on first page
+        new ButtonBuilder()
+            .setCustomId('lbnext')
+            .setLabel('Next')
+            .setStyle(ButtonStyle.Primary)
+            .setDisabled(start + 10 >= data.users.length) // Disable if no more users
+    );
+
+    return { embeds: embed, components: row };
+}
+
 // Guessing game logic
 async function startGuess(interaction, difficulty) {
     if (!interaction.memberPermissions.has('Administrator') && process.env.DISCORD_TOKEN === process.env.TEST_BOT_TOKEN) {
@@ -211,7 +274,7 @@ async function startGuess(interaction, difficulty) {
     }
 
     if (activeChannels.includes(interaction.channel.id)) {
-        return interaction.reply({ content: "There is a game currenlty active in this channel.", ephemeral: true })
+        return interaction.reply({ content: "There is a game currenlty active in this channel.", ephemeral: true });
     }
 
     await interaction.deferReply();
@@ -231,6 +294,10 @@ async function startGuess(interaction, difficulty) {
         }
     } else {
         filteredList = data.levels
+    }
+
+    if (filteredList.length < 1) {
+        return interaction.editReply({content: "The bot is not ready to be used yet, please wait for more levels to be added.", ephemeral: true });
     }
 
     var randomLevelIndex = Math.floor(Math.random() * filteredList.length)
@@ -315,8 +382,29 @@ async function startGuess(interaction, difficulty) {
 
     });
 }
+
+
+// Getting level count for the status.
+const rawLevelData = await fs.readFile('./levels.json', 'utf8');
+const levelData = JSON.parse(rawLevelData);
+
+const levelCount = levelData.levels.length
+
+// Bot statuses, feel free to add your own.
+const statuses = [
+    { activities: [{ name: '#McGDPS4L', type: ActivityType.Playing }], status: 'online' }, // You will probably want to change this one
+    { activities: [{ name: `Over ${levelCount} levels`, type: ActivityType.Watching }], status: 'online' },
+    { activities: [{ name: 'Anything but sparky', type: ActivityType.Playing }], status: 'online' }
+];
+
+let currentStatus = 0;
+
 client.on('clientReady', () => {
     console.log("Bot is online")
+    setInterval(() => {
+        client.user.setPresence(statuses[currentStatus]);
+        currentStatus = (currentStatus + 1) % statuses.length;
+    }, 30000); // How often it changes in miliseconds
 });
 
 client.login(process.env.DISCORD_TOKEN);
