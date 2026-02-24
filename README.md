@@ -23,7 +23,7 @@ Inside the file, you will need to add some variables.
 DISCORD_TOKEN=(YOUR TOKEN HERE)
 GUILD_ID=(ID OF YOUR DISCORD SERVER)
 CLIENT_ID=(YOUR BOTS ID. THIS CAN BE FOUND IN THE GENERAL INFORMATION TAB ON THE DEVELOPER PORTAL)
-TEST_BOT_TOKEN=(THE TOKEN OF YOUR TESTING BOT IF YOU HAVE ONE. IF YOU DONT HAVE ONE, JUST PUT NONE HERE)
+TEST_BOT_TOKEN=(THE TOKEN OF YOUR TESTING BOT IF YOU HAVE ONE. IF YOU DONT HAVE ONE, JUST PUT NONE HERE. Using a test bot is recommended if you plan to heavily modify this source code so that you don't have to shut off your main bot while trying to change something.)
 ```
 Make sure to format the file exactly how I did here; no spaces, no quotation marks, and type the variable names in all caps.
 
@@ -59,9 +59,11 @@ PLEASE let me know if there is anything missing from these instructions on disco
 There is a file called settings.json. In this file (as of 2/15/2026) there are only 2 settings: allowedChannels and requestChannel.
 1. allowedChannels: In here, put the ids of the channels you want the guessing to be allowed in, format like this: ["channel id 1", "channel id 2"]. If you want it to be playable in all channels, just leave this empty.
 2. requestChannel (required): Put the id of the channel that you want level requests to be forwarded to. Currently the level request system is in beta so expect improvements to the level adding process soon.
-
-## Bot statuses
-You probably don't want the mcgdps ones, right? You can find the statuses near the bottom of src/index.js, you can customize them pretty easily. The different *ActivityTypes* are: Competing, Listening, Watching, Playing, Streaming, and Custom.
+3. managerRole: If you want to have a role for people that can use admin commands on the bot, put the ID of the role here. If left empty only people with server admin can use admin only commands.
+4. images: Image links. Correct is the default image when you guess a level correct, streak1 is for when the player has a streak of 5-9, streak2 is 10-14, streak3 is 15+.
+5. _STATUSES INFO: **this is just a note.** json files do not support putting notes so the best way to have a note is to put a value that is just useless. Changing this will do nothing.
+6. statuses: All of the different status the bot cycles through. You will probably get an error if there isnt at least 1 in here. See _STATUSES INFO for formatting help, and just copy the example ones.
+7. statusInterval: How many milliseconds between each status change. Putting it too low may cause problems.
 
 ## Playing the game:
 Just use /guess, just like the original sparky.
@@ -70,8 +72,11 @@ Just use /guess, just like the original sparky.
 Tell your server about the /request-sparky command. If you set the requestChannel in settings, when people use this command it will send a message to the specified channel with the name and image the user must provide.
 
 ## Adding levels
-Eventually a button to accept requests directly on the message will be added to make accepting requested levels easier.
 To add levels, use the /add-level command. Everything is pretty straight forward accept for adding the images which may be a bit confusing. If you are adding the image from a discord message, make sure to copy the image link **from a message that will never be deleted** and copy it like this:
 <img width="787" height="541" alt="image" src="https://github.com/user-attachments/assets/d9b0e016-00b4-4ed8-b6ea-c501b44de346" />
 
-There are some other commands but its pretty easy to figure out what they do. More will be added soon, like a command to correct/remove levels. At the moment, you have to go into the levels.json file and make the changes in there directly.
+## Editing levels:
+Use /edit-level to change the information of a level. Leave things blank that you dont want to change.
+
+## Removing levels:
+Currently, the only way to remove a level is to go into levels.json and delete it. Make sure to save the file and restart the bot after you do this.
