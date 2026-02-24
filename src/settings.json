@@ -1,4 +1,20 @@
 {
-    "allowedChannels": [], 
-    "requestChannel": ""
+    "allowedChannels": [],
+    "requestChannel": "",
+    "managerRole": "",
+    "images": {
+        "correct": "https://media.discordapp.net/attachments/1246531686213222436/1474936165814505512/rate.png?ex=699ba8d8&is=699a5758&hm=5909d386dfa87383452e9d10cc3a6d78cb1ade04da60355cc9a82ba8c772c49c&=&format=webp&quality=lossless&width=189&height=192",
+        "streak1": "https://media.discordapp.net/attachments/1246531686213222436/1474936164937892106/epic.png?ex=699ba8d8&is=699a5758&hm=e2b49996176f7898f774d2df40db7b4db55a4328854a2d01026e3e030a704c14&=&format=webp&quality=lossless&width=188&height=192",
+        "streak2": "https://media.discordapp.net/attachments/1246531686213222436/1474936625694773370/legendary.png?ex=699ba946&is=699a57c6&hm=4442acbf69df05eacde203ec8402579804fc8618d8035b4bffb751339a419bd8&=&format=webp&quality=lossless&width=294&height=306",
+        "streak3": "https://media.discordapp.net/attachments/1246531686213222436/1474936165491671071/mythic.png?ex=699ba8d8&is=699a5758&hm=f66bea15c210559d4919d85b2155e76a4a279fb769dad8bf59bf29d45163e9c0&=&format=webp&quality=lossless&width=342&height=312"
+    },
+
+    "_STATUSES INFO": "0 = Playing, 1 = Streaming, 2 = Listening, 3 = Watching. statusInterval is how many milliseconds in between each status change.",
+
+    "statuses": [
+        { "name": "/Guess to begin!", "type": 2 },
+        { "name": "Anything but sparky", "type": 0 }
+    ],
+
+    "statusInterval": 30000
 }
