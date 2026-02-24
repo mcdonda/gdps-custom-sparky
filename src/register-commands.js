@@ -107,6 +107,47 @@ const commands = [
                 required: true
             }
         ]
+    },
+    {
+        name: "edit-level",
+        description: "(Admin Only) Edit details of a level.",
+        options: [
+            {
+                name: "level-name",
+                description: "Name of the level. If there is a typo, use /levels-list to figure out the old name.",
+                type: ApplicationCommandOptionType.String,
+                required: true
+            },
+            {
+                name: "new-name",
+                description: "(Optional) What you want to change the level name to.",
+                type: ApplicationCommandOptionType.String
+            },
+            {
+                name: "new-difficulty",
+                description: "(Optional) What you want to change the level's difficulty to.",
+                type: ApplicationCommandOptionType.String,
+                choices: [
+                    {
+                        name: "Easy",
+                        value: "Easy"
+                    },
+                    {
+                        name: "Medium",
+                        value: "Medium"
+                    },
+                    {
+                        name: "Hard",
+                        value: "Hard"
+                    }
+                ]
+            },
+            {
+                name: "new-image",
+                description: "Change the image link.",
+                type: ApplicationCommandOptionType.String
+            }
+        ]
     }
 ];
 
