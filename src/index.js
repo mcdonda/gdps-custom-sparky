@@ -199,7 +199,7 @@ client.on('interactionCreate', async (interaction) => {
     // edit-level:
     if (interaction.commandName === "edit-level") {
         if (!hasPerms) {
-            interaction.reply({ content: "You do not have permission to use this command.", ephemeral: true});
+            return interaction.reply({ content: "You do not have permission to use this command.", ephemeral: true});
         }
         const levelName = interaction.options.getString('level-name');
 
@@ -500,3 +500,4 @@ client.on('clientReady', () => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
