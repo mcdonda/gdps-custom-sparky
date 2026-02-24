@@ -24,8 +24,8 @@ client.on('interactionCreate', async (interaction) => {
     // Adding a level to be guessed
     if (interaction.commandName === "add-level") {
 
-        if (!interaction.memberPermissions.has('Administrator')) {
-            return interaction.reply({ content: 'Admin only command', ephemeral: true });
+        if (!hasPerms(interaction)) {
+            return interaction.reply({ content: 'You do not have permissions to use this command.', ephemeral: true });
         }
 
         const levelName = interaction.options.getString('level-name')
@@ -88,8 +88,8 @@ client.on('interactionCreate', async (interaction) => {
 
     // levels list admin command
     if (interaction.commandName === "levels-list") {
-        if (!interaction.memberPermissions.has('Administrator')) {
-            return interaction.reply({ content: 'Admins only.', ephemeral: true });
+        if (!hasPerms(interaction)) {
+            return interaction.reply({ content: 'You do not have permissions to use this command.', ephemeral: true });
         }
 
         // All of this was written by google gemini tbh:
@@ -191,8 +191,49 @@ client.on('interactionCreate', async (interaction) => {
         await channel.send({ content: "New Sparky Level Request", embeds: [embed] });
     }
 
+    // Play again button:
     if (interaction.customId === "play-again") {
         startGuess(interaction, "Any");
+    }
+
+    // edit-level:
+    if (interaction.commandName === "edit-level") {
+        if (!hasPerms) {
+            interaction.reply({ content: "You do not have permission to use this command.", ephemeral: true});
+        }
+        const levelName = interaction.options.getString('level-name');
+
+        const rawData = await fs.readFile('./levels.json', 'utf8');
+        const data = JSON.parse(rawData);
+
+        const level = data.levels.find(l => l.name === levelName);
+
+        if (!level) {
+            return interaction.reply({ content: `Level '${levelName}' not found. Did you capatalize?`, ephemeral: true });
+        }
+
+        const newName = interaction.options.getString('new-name');
+        const newDiff = interaction.options.getString('new-difficulty');
+        const newImage = interaction.options.getString('new-image');
+
+        var responseString = `Edited ${levelName}:`;
+
+        if (newName) {
+            level.name = newName;
+            responseString += `\n${levelName} -> ${newName}`;
+        }
+        if (newDiff) {
+            level.difficulty = newDiff;
+            responseString += `\n${level.difficulty} -> ${newDiff}`;
+        }
+        if (newImage) {
+            level.image = newImage;
+            responseString += `\nNew image: ${newImage}`;
+        }
+
+        await fs.writeFile('./levels.json', JSON.stringify(data, null, 2));
+
+        await interaction.reply({ content: responseString, ephemeral: true});
     }
 });
 
@@ -244,6 +285,7 @@ async function leaderboard(page) {
 
     items.forEach((user, index) => {
         lbString += `${start + index + 1}. <@${user.id}> (${user.points} points)\n`;
+        
     });
 
     const embed = new EmbedBuilder()
@@ -310,15 +352,27 @@ async function startGuess(interaction, difficulty) {
         color = 'Green';
         reward = 1;
     } else if (randomLevel.difficulty === "Medium") {
-        color = 'Orange';
+        color = 'Yellow';
         reward = 2;
     } else {
         color = 'Red';
         reward = 3;
     }
 
+    /* Adding your own difficulties: 
+    1. In src/register-commands.js, in the add-level command, add the name of the difficulty to the difficulty choices list. Do the same to the guess command and edit-level commond under the difficulty choices. Once you've done these, run the register commands file with "node src/register-commands.js"
+    2. The bit right above this note is changing the color of the embed and determining how much points you will get for each difficulty. To add your new difficulty, first change the hard difficulty conditional from "} else {" to "} else if (randomLevel.difficulty === "Hard") {"
+    3. Now, add an else statement for your custom difficulty. It will look something like this:
+    } else {
+        color = 'Purple'; (or whatever you want it to be)
+        reward = 5; (or whatever)
+    }
+
+    You dont need to put "else if (randomLevel.difficulty === "Expert")" because that is the only other option currently, that would only be necessary if you add another difficulty.
+    */
+
     // Setting up the levels embed
-    const embed = new EmbedBuilder().setTitle("What is the name of this level?").setImage(randomLevel.image).setColor(color);
+    const embed = new EmbedBuilder().setTitle("What is the name of this level?").setImage(randomLevel.image).setColor(color).setFooter({ text: "Request levels to be added with /request-sparky"});
 
     // Sending the embed and starting the game
     await interaction.editReply({ embeds: [embed] });
@@ -339,72 +393,110 @@ async function startGuess(interaction, difficulty) {
             .setStyle(ButtonStyle.Success)
     );
 
+    const pointsRawData = await fs.readFile('./points.json', 'utf8');
+    const pointsData = JSON.parse(pointsRawData);
+
     collector.on('collect', async m => {
         if (m.content.toLowerCase() === randomLevel.name.toLowerCase()) {
-            const embed = new EmbedBuilder().setDescription(`The level was **${randomLevel.name}!** ${m.author} won! +**${reward}** points`)
-
-            interaction.channel.send({ embeds: [embed], components: [row] });
+            
             won = true;
             collector.stop();
-
-            const pointsRawData = await fs.readFile('./points.json', 'utf8');
-            const pointsData = JSON.parse(pointsRawData);
 
             let userProfile = pointsData.users.find(u => u.id === m.author.id);
             if (!userProfile) {
 
                 pointsData.users.push({
                     id: m.author.id,
-                    points: reward
+                    points: reward,
+                    streak: 1
                 });
 
                 console.log("Added new player");
             } else {
+                if (!userProfile.streak) {
+                    userProfile.streak = 1;
+                } else {
+                    userProfile.streak += 1;
+                }
+
                 userProfile.points += reward;
             }
 
+            // Getting streak image:
+            var thumbnail = settingsData.images.correct;
+            if (userProfile.streak >= 15) {
+                thumbnail = settingsData.images.streak3;
+            } else if (userProfile.streak >= 10) {
+                thumbnail = settingsData.images.streak2;
+            } else if (userProfile.streak >= 5) {
+                thumbnail = settingsData.images.streak1;
+            }
+
+
+            const embed = new EmbedBuilder().setDescription(`The level was **${randomLevel.name}!** ${m.author} won! +${reward} points`).setFooter({ text: `Streak: ${userProfile.streak}`, iconURL: thumbnail});
+
+            interaction.channel.send({ embeds: [embed], components: [row] });
             await fs.writeFile('./points.json', JSON.stringify(pointsData, null, 2));
 
         }
     });
 
 
-    collector.on('end', m => {
+    collector.on('end', async m => {
         var channelIndex = activeChannels.indexOf(interaction.channel.id);
 
         if (channelIndex !== -1) {
             activeChannels.splice(channelIndex, 1);
         }
 
+        let userProfile = pointsData.users.find(u => u.id === interaction.user.id);
 
         if (won) { return; }
-        interaction.channel.send({content: `**Times up!** 😂`, components: [row]});
 
+        var streakLostText = ``;
+        if (userProfile.streak > 2) {
+            streakLostText = `\n<@${interaction.user.id}>'s Streak of ${userProfile.streak} has been lost.`
+        }
+        interaction.channel.send({content: `**Times up!** 😂 ${streakLostText}`, components: [row]});
+        userProfile.streak = 0;
+
+        await fs.writeFile('./points.json', JSON.stringify(pointsData, null, 2));
     });
 }
 
+// Checking if this user has perms for this command
+function hasPerms(interaction) {
+    if (settingsData.managerRole != "") {
+        return interaction.member.roles.cache.find(r => r.id === settingsData.managerRole);
+    } else {
+        return interaction.memberPermissions.has("Administrator");
+    }
+}
 
-// Getting level count for the status.
+var statuses = settingsData.statuses // Getting statuses from settings.json. Feel free to add you own in there.
+
+// Adding level count status (needs code which cant be done in .json files). I do not recommend adding your own status that has coding unless you have decent scripting knowledge.
 const rawLevelData = await fs.readFile('./levels.json', 'utf8');
 const levelData = JSON.parse(rawLevelData);
 
 const levelCount = levelData.levels.length
 
-// Bot statuses, feel free to add your own.
-const statuses = [
-    { activities: [{ name: '#McGDPS4L', type: ActivityType.Playing }], status: 'online' }, // You will probably want to change this one
-    { activities: [{ name: `Over ${levelCount} levels`, type: ActivityType.Watching }], status: 'online' },
-    { activities: [{ name: 'Anything but sparky', type: ActivityType.Playing }], status: 'online' }
-];
+statuses.push(
+    {name: `Guess from ${levelCount} different levels!`, type: 3}
+);
 
 let currentStatus = 0;
 
 client.on('clientReady', () => {
     console.log("Bot is online")
     setInterval(() => {
-        client.user.setPresence(statuses[currentStatus]);
+        const status = statuses[currentStatus];
+        client.user.setPresence({
+            activities: [{ name: status.name, type: status.type }],
+            status: 'online'
+        });
         currentStatus = (currentStatus + 1) % statuses.length;
-    }, 30000); // How often it changes in miliseconds
+    }, settingsData.statusInterval); // 
 });
 
 client.login(process.env.DISCORD_TOKEN);
