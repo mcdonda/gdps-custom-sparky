@@ -424,19 +424,25 @@ async function startGuess(interaction, difficulty) {
 
             // Getting streak image:
             var thumbnail = settingsData.images.correct;
-            if (userProfile.streak >= 15) {
-                thumbnail = settingsData.images.streak3;
-            } else if (userProfile.streak >= 10) {
-                thumbnail = settingsData.images.streak2;
-            } else if (userProfile.streak >= 5) {
-                thumbnail = settingsData.images.streak1;
+            if (userProfile) {
+                if (userProfile.streak >= 15) {
+                    thumbnail = settingsData.images.streak3;
+                } else if (userProfile.streak >= 10) {
+                    thumbnail = settingsData.images.streak2;
+                } else if (userProfile.streak >= 5) {
+                    thumbnail = settingsData.images.streak1;
+                }
             }
 
 
-            const embed = new EmbedBuilder().setDescription(`The level was **${randomLevel.name}!** ${m.author} won! +${reward} points`).setFooter({ text: `Streak: ${userProfile.streak}`, iconURL: thumbnail});
-
-            interaction.channel.send({ embeds: [embed], components: [row] });
-            await fs.writeFile('./points.json', JSON.stringify(pointsData, null, 2));
+            await fs.writeFile('./points.json', JSON.stringify(pointsData, null, 2));   
+            if (userProfile) {
+                const embed = new EmbedBuilder().setDescription(`The level was **${randomLevel.name}!** ${m.author} won! +${reward} points`).setFooter({ text: `Streak: ${userProfile.streak}`, iconURL: thumbnail});
+                interaction.channel.send({ embeds: [embed], components: [row] });
+            } else {
+                const embed = new EmbedBuilder().setDescription(`The level was **${randomLevel.name}!** ${m.author} won! +${reward} points`).setFooter({ text: `Streak: 1`, iconURL: thumbnail});
+                interaction.channel.send({ embeds: [embed], components: [row] });
+            }
 
         }
     });
@@ -454,11 +460,15 @@ async function startGuess(interaction, difficulty) {
         if (won) { return; }
 
         var streakLostText = ``;
-        if (userProfile.streak > 2) {
-            streakLostText = `\n<@${interaction.user.id}>'s Streak of ${userProfile.streak} has been lost.`
+        if (userProfile) {
+            if (userProfile.streak > 2) {
+                streakLostText = `\n<@${interaction.user.id}>'s Streak of ${userProfile.streak} has been lost.`
+            }
+            interaction.channel.send({content: `**Times up!** 😂 ${streakLostText}`, components: [row]});
+            userProfile.streak = 0;
+        } else {
+            interaction.channel.send({content: `**Times up!** 😂`, components: [row]});
         }
-        interaction.channel.send({content: `**Times up!** 😂 ${streakLostText}`, components: [row]});
-        userProfile.streak = 0;
 
         await fs.writeFile('./points.json', JSON.stringify(pointsData, null, 2));
     });
